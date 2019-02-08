@@ -5,6 +5,8 @@ $result_usuario = "SELECT * FROM dbo.ramal WHERE id = '$id'";
 $resultado_usuario = sqlsrv_query ($con, $result_usuario);
 $row_usuario = sqlsrv_fetch_array($resultado_usuario);
 
+
+
 ?>
 
 
@@ -30,7 +32,10 @@ $row_usuario = sqlsrv_fetch_array($resultado_usuario);
 
 <div class="C-base" style="margin-left:0 auto;"> 
 
-    <form method="POST" action="services/editar_ramal_banco.php">
+    <form method="POST" action="services/ramal.php">
+
+        <input type="hidden" name="cod_post" value="2">
+
         <input type="hidden" name="id" value="<?php echo $row_usuario['id'];?>">
 
         <p><label for="nome">Nome:</label>

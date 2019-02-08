@@ -1,4 +1,6 @@
-<?php
+<?php namespace conexao;
+
+
 
   $servidor = "ENTERPRISE\ENTERPRISE";
   $basedados = "Cpd";

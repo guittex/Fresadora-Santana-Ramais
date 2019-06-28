@@ -1,9 +1,9 @@
 <?php
 
 if($_POST){
-    $cod_post = $_POST['cod_post'];
+	$cod_post = $_POST['cod_post'];
 }else{
-    $cod_post = $_GET['cod_post'];
+	$cod_post = $_GET['cod_post'];
 }
 
 class ramal{
@@ -118,7 +118,7 @@ class ramal{
 }
 
 $ramal = new ramal();
-$ramal->id = $_POST['id'];
+	
 $ramal->nome = $_POST['nome'];
 $ramal->departamento = $_POST['departamento'];
 $ramal->ramal = $_POST['ramal'];

@@ -66,7 +66,23 @@ include_once("menu.php");
                 <?php
                 $SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
                 if($SendPesqUser){
-                    pesquisar_ramal();
+                    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+                    $departamento = filter_input(INPUT_POST, 'departamento', FILTER_SANITIZE_STRING);
+                    $result_usuario = "SELECT * FROM dbo.ramal WHERE nome LIKE '%$nome%' and departamento LIKE '$departamento%' ORDER BY departamento , nome  " ;
+                    $resultado_usuario = sqlsrv_query($con, $result_usuario);
+                    while($row_usuario = sqlsrv_fetch_array($resultado_usuario)){
+                        echo "<tr>";
+                        echo "<td>" . $row_usuario['nome'] . "</td>";
+                        echo "<td>" . $row_usuario['ramal'] . "</td>";
+                        echo "<td>" . $row_usuario['departamento'] . "</td>";
+                        echo "<td>" . $row_usuario['email'] . "</td>";
+                        echo "<td>" . $row_usuario['corporativo'] . "</td>";
+                        echo "<td>";
+                        echo "<button type=button class='btn btn-xs btn-warning' data-toggle=modal data-target='#exampleModal' data-whatever=".$row_usuario['id']. " ; data-whatevernome=" . $row_usuario['nome'] . " data-whateverdepartamento=" . $row_usuario['departamento'] . " data-whateverramal="  . $row_usuario['ramal'] . " data-whateveremail=" . $row_usuario['email'] . " data-whatevercorporativo=" . $row_usuario['corporativo'] . "	>Editar</button>";
+                        echo "<button type=button class='btn btn-xs btn-danger' style='margin-left: 5px'> <a href=services/ramal.php?id=" . $row_usuario['id'] ."&cod_post=3 data-confirm='Tem certeza de que deseja excluir o item selecionado?' style='color: inherit'</a> Apagar</button>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
                 }
                 ?>			
 
@@ -175,7 +191,7 @@ include_once("menu.php");
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel" style="text-align: center;"><?php echo $rows_orcamento['nome']; ?></h4>
+            <h4 class="modal-title" id="myModalLabel" style="text-align: center;"><?php echo $rows_orcamento['nome']; ?></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
